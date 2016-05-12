@@ -16,6 +16,7 @@ function [] = visualizeSeizure(patientID,szNum,Chan,saveFlag)
 % checking for the existence of macroelectrode data.
 if ischar(Chan) && strcmp(Chan,'all') && exist([patientID '_2K_ECoGandHighGamma_sz' num2str(szNum) '.mat'],'file')
     load([patientID '_2K_ECoGandHighGamma_sz' num2str(szNum) '.mat'])
+    tsec = linspace(0,size(Seizure1K,2)./1e3,size(Seizure1K,2));
     for Chan = 1:size(Seizure1K,1)
         % plot LFP from macro contact in [Chan]
         figure(1)
