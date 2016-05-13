@@ -96,6 +96,8 @@ if isequal(exist([patientID '_MUAtimes-' num2str(szNum) '.mat'],'file'),2)
         muaFlag = 'y'; % input('found MUA traces! would you like to visualize those? (y/n) \n     otherwise we"ll visualize the threshold crossings as a raster plot.','s')
         if strcmp(muaFlag,'y')
             
+            spacing = 400;
+            
             % plot MUA traces.
             figure(nbf*10)
             % just starting with plotting the seizure.
@@ -113,19 +115,20 @@ if isequal(exist([patientID '_MUAtimes-' num2str(szNum) '.mat'],'file'),2)
             hold on
             t30000 = linspace(0,size(mua_data.muaTraces,2)./3e4,size(mua_data.muaTraces,2));
             for cz = ((nbf-1)*8)+1:nbf*8
-                plot(t30000,mua_data.muaTraces(cz,:)+(200*cz),'k')
-                text(0,200*cz,trodeLabels(cz), 'fontsize', 16,'color',[0 1 0])
+                plot(t30000,mua_data.muaTraces(cz,:)+(spacing*cz),'k')
+                text(0,spacing*cz,trodeLabels(cz), 'fontsize', 16,'color',[0 1 0])
             end
             hold off
             ylabel('MUA traces')
             set(gca, 'linewidth', 2, 'fontsize', 16)
             axis tight
-            ylim([((((nbf-1)*8)+1)*200)-400 (200*cz)+400])
+            ylim([((((nbf-1)*8)+1)*spacing)-spacing (spacing*cz)+spacing])
             
             % saving
             if saveFlag
                 maximize(nbf*10)
                 saveas(nbf*10,[patientID '_sz' num2str(szNum) '_microelectrodes.pdf'])
+                saveas(nbf*10,[patientID '_sz' num2str(szNum) '_microelectrodes.fig'])
                 close (nbf*10)
             end
             
