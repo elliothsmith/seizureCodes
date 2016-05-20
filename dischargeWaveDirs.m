@@ -119,7 +119,7 @@ for bst = 1:length(times)
     %% calculating burst direction.
     binaryImage = ArrayOrder(:,:,bst)~=0;
     measurementsPlus = regionprops(logical(binaryImage),ArrayOrder(:,:,bst),'WeightedCentroid');
-    measurementsMinus = regionprops(logical(binaryImage),96-ArrayOrder(:,:,bst),'WeightedCentroid');
+    measurementsMinus = regionprops(logical(binaryImage),size(data,1)-ArrayOrder(:,:,bst),'WeightedCentroid');
     
     Rminus = measurementsMinus.WeightedCentroid;
     Rplus = measurementsPlus.WeightedCentroid;
