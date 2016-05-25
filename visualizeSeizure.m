@@ -12,6 +12,7 @@ function [] = visualizeSeizure(patientID,szNum,Chan,saveFlag)
 % author: EHS20160512
 %   - https://github.com/elliothsmith/seizureCodes
 
+muaFlag = 'y';
 
 % checking for the existence of macroelectrode data.
 if ischar(Chan) && strcmp(Chan,'all') && exist([patientID '_2K_ECoGandHighGamma_sz' num2str(szNum) '.mat'],'file')
@@ -43,7 +44,7 @@ if ischar(Chan) && strcmp(Chan,'all') && exist([patientID '_2K_ECoGandHighGamma_
         % saving
         if saveFlag
             maximize(1)
-            saveas(1,[patientID '_sz' num2str(szNum) '_macroContact' strtrim(trodeLabels{Chan}) '.pdf'])
+            saveas(1,[patientID '_sz' num2str(szNum) '_macroContact' strtrim(char(trodeLabels{Chan})) '.pdf'])
         end
         
         close(1)
@@ -77,7 +78,7 @@ elseif ~ischar(Chan) && exist([patientID '_2K_ECoGandHighGamma_sz' num2str(szNum
     % saving
     if saveFlag
         maximize(1)
-        saveas(1,[patientID '_sz' num2str(szNum) '_macroContact' strtrim(trodeLabels{Chan}) '.pdf'])
+        saveas(1,[patientID '_sz' num2str(szNum) '_macroContact' strtrim(char(trodeLabels{Chan})) '.pdf'])
     end
     
     close(1)
@@ -88,7 +89,7 @@ if isequal(exist([patientID '_MUAtimes-' num2str(szNum) '.mat'],'file'),2)
     MUAflag = 1;
     load([patientID '_MUAtimes-' num2str(szNum) '.mat'])
     
-    numBFs = 4; %input('how many BFs were there in this pt?');
+    numBFs = floor(length(trodeLabels)/8);   % input('how many BFs were there in this pt?');
     
     for nbf = 1:numBFs
         
@@ -193,3 +194,4 @@ if exist([patientID '_1Kdownsampled_seizure-' num2str(szNum) '.mat'],'file')
 end
 
 end
+
