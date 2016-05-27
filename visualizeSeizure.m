@@ -84,9 +84,9 @@ elseif ~ischar(Chan) && exist([patientID '_2K_ECoGandHighGamma_sz' num2str(szNum
     close(1)
 end
 
-% looking for multiunit activity data.
+%% looking for multiunit activity data.
 if isequal(exist([patientID '_MUAtimes-' num2str(szNum) '.mat'],'file'),2)
-    MUAflag = 1;
+
     load([patientID '_MUAtimes-' num2str(szNum) '.mat'])
     
     numBFs = floor(length(trodeLabels)/8);   % input('how many BFs were there in this pt?');
@@ -97,7 +97,7 @@ if isequal(exist([patientID '_MUAtimes-' num2str(szNum) '.mat'],'file'),2)
         muaFlag = 'y'; % input('found MUA traces! would you like to visualize those? (y/n) \n     otherwise we"ll visualize the threshold crossings as a raster plot.','s')
         if strcmp(muaFlag,'y')
             
-            spacing = 400;
+            spacing = 1000;
             
             % plot MUA traces.
             figure(nbf*10)
@@ -128,8 +128,8 @@ if isequal(exist([patientID '_MUAtimes-' num2str(szNum) '.mat'],'file'),2)
             % saving
             if saveFlag
                 maximize(nbf*10)
-                saveas(nbf*10,[patientID '_sz' num2str(szNum) '_microelectrodes.pdf'])
-                saveas(nbf*10,[patientID '_sz' num2str(szNum) '_microelectrodes.fig'])
+                saveas(nbf*10,[patientID '_sz' num2str(szNum) '_microelectrodes' trodeLabels(((nbf-1)*8)+1) '.pdf'])
+                saveas(nbf*10,[patientID '_sz' num2str(szNum) '_microelectrodes' trodeLabels(((nbf-1)*8)+1) '.fig'])
                 close (nbf*10)
             end
             
@@ -170,6 +170,8 @@ elseif strcmp(muaFlag,'n')
     
 end
 
+%% TODO: add a figrue that plots a couple of micros from each bundle. 
+
 
 if exist([patientID '_1Kdownsampled_seizure-' num2str(szNum) '.mat'],'file')
     load([patientID '_1Kdownsampled_seizure-' num2str(szNum) '.mat'])
@@ -194,4 +196,5 @@ if exist([patientID '_1Kdownsampled_seizure-' num2str(szNum) '.mat'],'file')
 end
 
 end
+
 

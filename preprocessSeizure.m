@@ -60,7 +60,7 @@ if isequal(micromacroFlag,1)||isequal(micromacroFlag,3)
         [b,a] = fir1(250,MUA_BAND/(Fs/2));
         
         % denoising full BW data by removing the first PC.
-        if size(NS5.Data,2)<Offset*15 + postictalMins*60*Fs
+        if size(NS5.Data,2)>Offset*15 + postictalMins*60*Fs
             display('not enough time at the end of this file to retain the requested postictal data.\nGoing to end of file...')
             tmp = double(NS5.Data(:,Onset*15 - preictalMins*60*Fs:end));        
         else
@@ -266,4 +266,5 @@ end
 
 
 end
+
 
