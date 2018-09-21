@@ -13,48 +13,7 @@ for sz = 1
     
     switch sz
         % Utah Array Pts.
-        case 1
-            patientID = 'C5-1';
-            % load UMA LFP
-            load('/data/selected_data/preprocessedEHS/preprocessedColumbiaUTAHARRAYSeizures/C5_2Kdownsampled_seizure-SHORT-1.mat')
-
-            % sampling rate. 
-            Fs = 2e3;
-
-            % defines the epoch we're examining
-            szStart = 110*Fs;
-            szEnd = (120+59)*Fs;
-			data = Seizure1K(:,szStart:szEnd);
-
-			label = {'uma'}
-			chanLabels = repmat(label,1,96);
-			recruited = 20;
-       case 2
-            patientID = 'C5-2';
-            load('/data/selected_data/preprocessedEHS/preprocessedColumbiaUTAHARRAYSeizures/ECoG/C5/C5-2_seizure.mat')
-            coreChan = 28;
-            chanLabels =  C5_ECoG_labels;
-            recruited = 25;
-            data = data(1:43,:);
-        case 3
-            patientID = 'C5-3';
-            load('/data/selected_data/preprocessedEHS/preprocessedColumbiaUTAHARRAYSeizures/ECoG/C5/C5-3_seizure.mat')
-            coreChan = 28;
-            chanLabels =  C5_ECoG_labels;
-            recruited = 30;
-            data = data(1:43,:);
-        case 4
-            patientID = 'NYU442-1';
-            load('/data/selected_data/preprocessedEHS/preprocessedNYUUTAHARRAYSeziures/ECoG/NY442_seizure-1.mat')
-            data = record;
-            Fs = 512;
-            chanLabels = header.label;
-            coreChan = 20;
-            recruited = 35;
-            clear record header
-            % BF Pts.
-        case 5
-            
+        
     end
     
     
@@ -272,31 +231,3 @@ for sz = 1
 end
 
 
-
-
-%
-% case 1
-%             recruitmentPeriod = [0 31];
-%             terminationPeriod = [31 58];
-%             recruited = 17;
-%         case 2
-%             recruitmentPeriod = [0 34];
-%             terminationPeriod = [34 73];
-%             recruited = 20;
-%         case 3
-%             recruitmentPeriod = [0 40];
-%             terminationPeriod = [40 98];
-%             recruited = 24;
-%         case 4
-%             recruitmentPeriod = [0 18];
-%             terminationPeriod = [18 32];
-%             recruited = 10;
-%         case 5
-%             recruitmentPeriod = [0 20];
-%             terminationPeriod = [20 43];
-%             recruited = 11;
-%         case 6
-%             recruitmentPeriod = [0 70];
-%             terminationPeriod = [70 110];
-%             recruited = 40;
-%
