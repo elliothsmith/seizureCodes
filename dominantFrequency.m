@@ -23,10 +23,10 @@ end
 nChans = size(data,1);
 for ch = 1:nChans
     display(sprintf('spectral calculations for channel %d out of %d',ch,nChans))
-    [wcoeffs,~,scale] = basewave4(data(ch,:),Fs,fPass(1),fPass(2),8,0);
+    [wcoeffs,period,scales] = basewave4(data(ch,:),Fs,fPass(1),fPass(2),8,0);
     
     % determining scales in Hz
-    scaleFreqs = linspace(fPass(1),fPass(2),length(scale));
+    scaleFreqs = period.^-1;
     %scaleScales = scale*Fs/2;
     dominantFreq.fHz = scaleFreqs;
     
